@@ -5,12 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <script src="/node_modules/tinymce/tinymce.min.js"></script>
+    <script type="module" src="./scripts/main.js"></script>
 
     <script type="text/javascript">
       tinymce.init({
         selector: "#mytextarea",
         promotion: false,
         branding: false,
+        plugins: "highlight",
+        toolbar:
+          "redo | undo | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | code blockquote | h1 h2 h3 h4 h5 h6 | link image | testPlugin | highlight",
+
+        setup: function (editor) {
+          editor.on("click", function (e) {
+            if (e.target.classList.contains("highlighted")) {
+              alert(e.target.id);
+            }
+          });
+        },
       });
     </script>
   </head>
