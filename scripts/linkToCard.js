@@ -1,6 +1,6 @@
-tinymce.PluginManager.add("highlight", function (editor, url) {
-  editor.ui.registry.addSplitButton("highlight", {
-    text: "Highlight",
+tinymce.PluginManager.add("linkToCard", function (editor, url) {
+  editor.ui.registry.addSplitButton("linkToCard", {
+    text: "Card Link",
     onAction: function () {
       // Default action
     },
@@ -8,7 +8,7 @@ tinymce.PluginManager.add("highlight", function (editor, url) {
       var newContent =
         '<span id="' +
         value +
-        '" style="background-color: yellow;" class="highlighted">' +
+        '" style="background-color: yellow;" class="linked">' +
         editor.selection.getContent() +
         "</span> "; // Add closing tag and space
       editor.insertContent(newContent);

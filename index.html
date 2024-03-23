@@ -17,14 +17,14 @@
         selector: "#mytextarea",
         promotion: false,
         branding: false,
-        plugins: "highlight wordcount",
+        plugins: "linkToCard wordcount",
         toolbar:
-          "redo | undo | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | code blockquote | h1 h2 h3 h4 h5 h6 | link image | testPlugin | highlight",
+          "redo | undo | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | code blockquote | h1 h2 h3 h4 h5 h6 | link image | testPlugin | linkToCard",
 
         setup: function (editor) {
           editor.on("click", function (e) {
             if (
-              e.target.classList.contains("highlighted") &&
+              e.target.classList.contains("linked") &&
               document.querySelector("#" + e.target.id + "Editor") === null
             ) {
               // Create a new div
