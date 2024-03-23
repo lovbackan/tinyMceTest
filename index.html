@@ -8,18 +8,42 @@
     <script type="module" src="./scripts/main.js"></script>
 
     <script type="text/javascript">
+      //make this into its own file and import the text from a databse.
+      function fetchCardText() {
+        const fetchExample = "blablablalbab";
+        return fetchExample;
+      }
       tinymce.init({
         selector: "#mytextarea",
         promotion: false,
         branding: false,
-        plugins: "highlight",
+        plugins: "highlight wordcount",
         toolbar:
           "redo | undo | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | code blockquote | h1 h2 h3 h4 h5 h6 | link image | testPlugin | highlight",
 
         setup: function (editor) {
           editor.on("click", function (e) {
-            if (e.target.classList.contains("highlighted")) {
-              alert(e.target.id);
+            if (
+              e.target.classList.contains("highlighted") &&
+              document.querySelector("#" + e.target.id + "Editor") === null
+            ) {
+              // Create a new div
+              var newDiv = document.createElement("div");
+              console.log("new div");
+              newDiv.id = e.target.id + "Editor";
+              newDiv.style.width = "30rem";
+              newDiv.style.height = "20rem";
+
+              // Append the new div to the body of the document
+              document.body.appendChild(newDiv);
+
+              // Initialize a new TinyMCE editor inside the new div
+              tinymce.init({
+                selector: "#" + newDiv.id,
+                init_instance_callback: function (editor) {
+                  editor.setContent(`<p>${fetchCardText()}</p>`);
+                },
+              });
             }
           });
         },
