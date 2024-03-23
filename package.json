@@ -1,6 +1,7 @@
 {
   "type": "module",
   "dependencies": {
+    "jquery": "^4.0.0-beta",
     "tinymce": "^6"
   }
 }

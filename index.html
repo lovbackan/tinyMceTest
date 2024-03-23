@@ -6,6 +6,7 @@
     <title>Document</title>
     <script src="/node_modules/tinymce/tinymce.min.js"></script>
     <script type="module" src="./scripts/main.js"></script>
+    <script src="./node_modules/jquery/dist/jquery.min.js"></script>
 
     <script type="text/javascript">
       //make this into its own file and import the text from a databse.
@@ -24,22 +25,25 @@
         setup: function (editor) {
           editor.on("click", function (e) {
             if (
-              e.target.classList.contains("linked") &&
-              document.querySelector("#" + e.target.id + "Editor") === null
+              $(e.target).hasClass("linked") &&
+              $("#" + "card" + e.target.id).length === 0
             ) {
-              // Create a new div
-              var newDiv = document.createElement("div");
-              console.log("new div");
-              newDiv.id = e.target.id + "Editor";
-              newDiv.style.width = "30rem";
-              newDiv.style.height = "20rem";
+              // Create a new div and h1
+              var $newDiv = $("<div>", {
+                //find a good way to make the id sassable, we want all of these to get the same styling, except that we want to cascade its position and store it so that when we move around the card it should save its positiion
+                id: e.target.id,
+              });
+              var $newH1 = $("<h1>", { id: "title", text: e.target.id });
+
+              // Append the new h1 to the new div
+              $newDiv.append($newH1);
 
               // Append the new div to the body of the document
-              document.body.appendChild(newDiv);
+              $("body").append($newDiv);
 
               // Initialize a new TinyMCE editor inside the new div
               tinymce.init({
-                selector: "#" + newDiv.id,
+                selector: "#" + $newDiv.attr("id"),
                 init_instance_callback: function (editor) {
                   editor.setContent(`<p>${fetchCardText()}</p>`);
                 },
