@@ -43,6 +43,11 @@
 
               // Initialize a new TinyMCE editor inside the new div
               tinymce.init({
+                promotion: false,
+                branding: false,
+                plugins: "linkToCard wordcount",
+                toolbar:
+                  "redo | undo | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | code blockquote | h1 h2 h3 h4 h5 h6 | link image | testPlugin | linkToCard",
                 selector: "#" + $newDiv.attr("id"),
                 init_instance_callback: function (editor) {
                   editor.setContent(`<p>${fetchCardText()}</p>`);
