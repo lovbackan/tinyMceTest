@@ -5,12 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <script src="/node_modules/tinymce/tinymce.min.js"></script>
-    <script type="module" src="./scripts/main.js"></script>
+    <!-- <script type="module" src="./scripts/main.js"></script> -->
     <script src="./node_modules/jquery/dist/jquery.min.js"></script>
 
     <link rel="stylesheet" href="styles.css" />
     <script type="text/javascript">
       //make this into its own file and import the text from a databse.
+      tinymce.PluginManager.add("linkToCard", function (editor, url) {
+        editor.ui.registry.addSplitButton("linkToCard", {
+          text: "Card Link",
+          onAction: function () {
+            // Default action
+          },
+          onItemAction: function (api, value) {
+            var newContent =
+              '<span id="' +
+              value +
+              '" style="background-color: yellow;" class="linked">' +
+              editor.selection.getContent() +
+              "</span> "; // Add closing tag and space
+            editor.insertContent(newContent);
+          },
+          fetch: function (callback) {
+            var items = [
+              //fetch  these values from a database where the options are form the given story
+              { type: "choiceitem", text: "Value 1", value: "value1" },
+              { type: "choiceitem", text: "Value 2", value: "value2" },
+              { type: "choiceitem", text: "Value 3", value: "value3" },
+            ];
+            callback(items);
+          },
+        });
+      });
+
       function fetchCardText() {
         const fetchExample = "blablablalbab";
         return fetchExample;
@@ -61,8 +88,8 @@
     </script>
   </head>
   <body>
-    <h1>TinyMCE Quick Start Guide</h1>
-    <form id="mainEditor" method="post">
+    <h1>TinyMCE Test</h1>
+    <form id="Main-editor" method="post">
       <textarea id="mytextarea"></textarea>
     </form>
   </body>

@@ -1,5 +1,11 @@
 #Main-editor {
   width: 30rem;
+  cursor: text;
+}
+
+.editor-card {
+  width: 20rem;
+  height: 100%;
 }
 
 h1 {
